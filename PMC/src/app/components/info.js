@@ -17,25 +17,30 @@ class Info extends Component {
         this.obtenerInformacion();
     }
     obtenerInformacion(){
-        fetch('api/task')
-        .then(res=> res.json())
+        fetch('api/task/members/')
+        .then(res=> res.json(res))
         .then(data=>{
+            var id = data[data.length-1]._id;
             console.log('si sirvio');
-           
-            
-            var numeroApertura = JSON.parse(data[data.length-1].personality.personality[0].raw_score);
+            fetch('api/task/members/'+id)
+            .then(res=>res.json(res))
+            .then(data2=>{
+            var numeroApertura = JSON.parse(data2[data2.length-1].personality.personality[0].raw_score);
 
-            var numeroResponsabilidad = JSON.parse(data[data.length-1].personality.personality[3].raw_score);
+            var numeroResponsabilidad = JSON.parse(data2[data2.length-1].personality.personality[3].raw_score);
 
-            var numeroCompromiso = JSON.parse(data[data.length-1].personality.personality[4].raw_score);
+            var numeroCompromiso = JSON.parse(data2[data2.length-1].personality.personality[4].raw_score);
 
-            var numeroLiderazgo = JSON.parse(data[data.length-1].personality.personality[1].raw_score);
+            var numeroLiderazgo = JSON.parse(data2[data2.length-1].personality.personality[1].raw_score);
             
             
             this.setState({AperturaAlCambio: Math.trunc(numeroApertura*100) });
             this.setState({responsabilidad:Math.trunc(numeroResponsabilidad*100) });
             this.setState({compromiso:Math.trunc(numeroCompromiso*100) });
             this.setState({liderazgo:Math.trunc(numeroLiderazgo*100) });
+            })
+            
+            
           
         })
         

@@ -25,7 +25,9 @@ class App extends Component {
             showRegistro:false,
             showRegistriEquipo:false,
             showEquipo:false,
-            showResultado: false
+            showResultado: false,
+            members: [],
+            group: ""
         };
         this.cambiarEstado = this.cambiarEstado.bind(this);
         this.cambiarALogin = this.cambiarALogin.bind(this);
@@ -36,6 +38,7 @@ class App extends Component {
         this.cambiarARegistroEquipos= this.cambiarARegistroEquipos.bind(this);
         this.cambiarAEquipo= this.cambiarAEquipo.bind(this);
         this.cambiarAResultado= this.cambiarAResultado.bind(this);
+        this.traerEstadosFormulario= this.traerEstadosFormulario.bind(this);
       
     };
 
@@ -150,7 +153,12 @@ class App extends Component {
         })
     }
    
-    
+    traerEstadosFormulario(grupo, miembros){
+        this.setState({
+            group: grupo,
+            members: miembros 
+        })
+    }
 
     render() {
         return (
@@ -179,9 +187,11 @@ class App extends Component {
             {/*registro*/}
             {this.state.showRegistro && <SingUp metodoLogin = {this.cambiarALogin} metodoRegistroEquipos = {this.cambiarARegistroEquipos}/>}
             {/*registroEquipo*/}
-            {this.state.showRegistriEquipo && <CrearEquipo metodoEquipo = {this.cambiarAEquipo}/>}
+            {this.state.showRegistriEquipo && <CrearEquipo metodoEquipo = {this.cambiarAEquipo} metodoEstados = {this.traerEstadosFormulario}/>}
             {/*Mostrar Equipo */}
-            {this.state.showEquipo && <Equipo metodoResultado = {this.cambiarAResultado} metodoRegistro={this.cambiarAFormulario} metodo2= {this.cambiarAInfo}/>}
+            {this.state.showEquipo && <Equipo metodoResultado = {this.cambiarAResultado} metodoRegistro={this.cambiarAFormulario} 
+            metodo2= {this.cambiarAInfo}  estadoGrupo= {this.state.group} estadoMiembros= {this.state.members}
+            metodoRegistroEquipos = {this.cambiarARegistroEquipos}/>}
             {/*Mostrar resultado*/}
             {this.state.showResultado && <Resultado metodoEquipo = {this.cambiarAEquipo}/>}
 

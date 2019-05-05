@@ -20,18 +20,24 @@ class Principal extends Component {
         this.handleChange = this.handleChange.bind(this);
     };
     addUser(e) {
-        console.log('Entre a post');
-        fetch('/api/task', {
-            method: 'POST',
-            body: JSON.stringify(this.state),
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            }
-        })
+        console.log('Entre a put');
+        fetch('/api/task/members')
+        .then(res=>res.json(res))
+        .then(data=>{
+            var id = data[data.length-1]._id;
+            fetch('/api/task/members/personality/'+ id, {
+                method: 'PUT',
+                body: JSON.stringify(this.state),
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                }
+            })
             .then(res => res.json(res))
-            .then(()=> {this.props.metodo2()})
-            .catch(err => console.error(err));
+
+        })
+        .then(()=> {this.props.metodo2()})
+        .catch(err => console.error(err));
 
             //Poner redireccioanmiento a "Has sido registrado exitosamente"
 
@@ -53,12 +59,6 @@ class Principal extends Component {
                         <div className="card">
                             <div className="card-content">
                                 <form onSubmit={this.addUser}>
-                                    <div className="row">
-                                        <div className="input-field col s12">
-                                            <h6>Nombre</h6>
-                                            <input value={this.state.name} name="name" onChange={this.handleChange} type="text" placeholder="Nombre" />
-                                        </div>
-                                    </div>
                                     <div className="row">
                                         <div className="input-field col s12">
                                             <h6>Edad</h6>

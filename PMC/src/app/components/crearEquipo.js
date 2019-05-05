@@ -8,7 +8,10 @@ class CrearEquipo extends Component{
             showCodigo:false,
             showCrear:false,
             name: "",
-            numberMembers: ""
+            numberMembers: "",
+            codigo:"",
+            members: [],
+            grupo : ""
         }
         this.mostrarCodigo= this.mostrarCodigo.bind(this);
         this.mostrarCrear= this.mostrarCrear.bind(this);
@@ -24,11 +27,30 @@ class CrearEquipo extends Component{
     
         });
     };
-    getEquipo(a){
-        fetch('/api/task/grupos')
+    getEquipo(e){
+        fetch('/api/task/members')
         .then(res=> res.json())
+        .then(data=>{
+            var idMiembro = data[data.length-1]._id;
+            fetch('/api/task/groups/'+ this.state.codigo,{
+                method: 'PUT',
+                body: JSON.stringify({
+                    "members": [{member: idMiembro}]
+                }),
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                }
+            })
+            .then(res => res.json(res))
+        })
+        .then(()=> { this.props.metodoEquipo()})
+        .catch(err => console.error(err));
+
+        e.preventDefault();
         
     }
+
 
       cambiar(e){
         console.log('Entre a post');
@@ -45,10 +67,23 @@ class CrearEquipo extends Component{
                 }
             })
                 .then(res => res.json(res))
-                .then(()=> { this.props.metodoEquipo()})
-                .catch(err => console.error(err));
+                /*.then(()=>{
+                    fetch('/api/task/groups')
+                    .then(res=>res.json(res))
+                    .then(data=>{
+                        var nombreGrupo = data[data.length-1].name;
+                        var miembros = data[data.length-1].members;
+                        this.setState({
+                            grupo: nombreGrupo,
+                            members: miembros
+                        })           
+                    })
+                })
+                .then(this.props.metodoEstados(this.state.grupo,this.state.members))
+                .catch(err => console.error(err));*/
         })
-        
+        .then(()=> { this.props.metodoEquipo()})
+        .catch(err => console.error(err));
         e.preventDefault();
       }
       mostrarCodigo(e){
@@ -93,9 +128,9 @@ class CrearEquipo extends Component{
                              </div>
                             </div>
                             {this.state.showCodigo && <div className="col-md-4 col-sm-4 col-xs-12 col-6"> 
-                                                        <form onSubmit={this.cambiar}>
+                                                        <form onSubmit={this.getEquipo}>
                                                             <div className="form-group">
-                                                                <input type="text" className="form-input" name="codigo"  placeholder="Codigo de quipo"/>
+                                                                <input type="text" className="form-input" value={this.state.codigo} name="codigo" onChange={this.handleChange} placeholder="Codigo de quipo"/>
                                                             </div>
                                                             <div className="form-group">
                                                                 <input type="submit" name="submit" className="form-submit"/>

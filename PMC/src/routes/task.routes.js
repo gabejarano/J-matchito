@@ -23,6 +23,23 @@ const profileParams = {
     accept_language: 'es'
 };
 
+var text = " ";
+
+router.put('/members/personality/:id', async (req, res) => {
+    text = req.body.description + ". " + req.body.profile + ". " + req.body.projects + ". " + req.body.qualities + ". " + req.body.achievement + ".";
+    profileParams.content = text;
+    personalityInsights.profile(profileParams, async function (err, response) {
+        if (err) {
+            console.log('error:', err);
+        } else {
+            req.body.personality = response;
+            const {personality, sex,document} = req.body;
+            var user = {personality, sex,document};
+            await Member.findByIdAndUpdate(req.params.id, user);
+            res.json({ status: 'User saved' });
+        }
+    });
+});
 //---------------------------------------------------------Routes---------------------------------------------------///-------------funcionAux--------------------------------------------------
 
 
@@ -50,8 +67,13 @@ router.post('/members/:id/groups', async (req, res) => {
 
 //--------------Post member within personility---------------------------------------
 router.post('/members', async (req, res) => {
-    const { name, email, password, repassword, age, sex, document, personality } = req.body;
-    var newMember = new Member({ name, email, password, repassword, age, sex, document, personality });
+
+    var age = "";
+    var sex = "";
+    var document ="";
+    var personality= "";
+    const { name, email, password, repassword } = req.body;
+    var newMember = new Member({ name, email, password, repassword,age ,sex , document , personality });
     await newMember.save();
     res.json({ status: 'member saved' });
 

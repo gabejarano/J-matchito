@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import Integrantes from './integrantes';
 
 class Equipo extends Component{
    
@@ -13,6 +14,7 @@ class Equipo extends Component{
         this.personalidad= this.personalidad.bind(this);
         this.cambiar= this.cambiar.bind(this);
         this.resultado= this.resultado.bind(this);
+        this.regresar= this.regresar.bind(this);
       }
     
     componentDidMount(){
@@ -31,9 +33,18 @@ class Equipo extends Component{
                 members: miembros,
                 idYo :id
             })           
-        })
-    };
+        }) 
+        /*this.setState({
+            nameGroup: this.props.estadoGrupo,
+            members: this.props.estadoMiembros
+        }) */
 
+    };
+    
+
+    regresar(e){
+        this.props.metodoRegistroEquipos()
+    }
     cambiar(e){
         this.props.metodoRegistro();
     }
@@ -67,21 +78,15 @@ class Equipo extends Component{
                                         <div className = "col s8">
                                             <button onClick= {this.resultado} className="btn light-blue darken-4">Medir rendimiento</button>
                                         </div>
+                                        <div className = "col s8">
+                                            <button onClick= {this.regresar} className="btn light-blue darken-4">Regresar</button>
+                                        </div>
                             </div>
                         <div className="col s7">
                             <div className="card">
                                 <div className="card-content">
                                     <form >
-										<div className="row">
-                                            <div className="input-field col s8">
-												Integrante 1<br/>
-                                            </div>
-                                            <div className="input-field col s4">
-                                            <button onClick = {this.personalidad}type="submit" className="btn light-blue darken-4">
-                                            Ver personalidad
-                                            </button>
-                                            </div>
-                                        </div>
+										<Integrantes estado = {this.state.member}/>
                                         <div className="row">
                                             <div className="input-field col s8">
 											 {this.state.idYo}<br/>
@@ -96,6 +101,7 @@ class Equipo extends Component{
                                             Realizar test
                                             </button>
                                             </div>
+                                            
                                         </div>
                                         
                                     </form>

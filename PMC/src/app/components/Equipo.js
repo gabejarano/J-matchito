@@ -66,8 +66,8 @@ class Equipo extends Component{
         })
         console.log(this.state.idMiembro);
     }
-    resultado(id){
-        this.props.metodoResultado(id);
+    resultado(e){
+        this.props.metodoResultado(this.state.idGrup);
     }
     render(){
         return(

@@ -1175,20 +1175,12 @@ display-flex, .display-flex, .display-flex-center {
     background-color: rgba(0,128,0,.7);
     transform: rotate(25deg);
      }
-#porcionFin {
-    transform:rotate(-145deg);
-     }
-#porcionFin .quesito {
-    background-color: rgba(255,0,0,.7);
-    transform: rotate(145deg);
-     }
 #porcion1 .quesito:after {
     content: attr(data-rel);
     left: 25%;
     line-height: 5;
     position: absolute;
     top: 0;
-    transform: rotate(-70deg);
 }
 #porcion2 .quesito:after {
     content: attr(data-rel);
@@ -1204,9 +1196,17 @@ display-flex, .display-flex, .display-flex-center {
     top: 4%;
     transform: rotate(70deg);
 }
-#porcionFin .quesito:after {
+#porcion4 .quesito:after {
    content: attr(data-rel);
    left: 10%;
    position: absolute;
    top: 30%;
+}
+#porcion5 .quesito:after {
+  content: attr(data-rel);
+  left: 25%;
+  line-height: 5;
+  position: absolute;
+  top: 0;
+  transform: rotate(-70deg);
 }

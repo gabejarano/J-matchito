@@ -196,7 +196,7 @@ class App extends Component {
             {/*informacion*/}
             {this.state.showInfo && <Info metodoEquipo= {this.cambiarAEquipo} estadoId={this.state.idMiembro}/>}
             {/*Mostrar resultado*/}
-            {this.state.showResultado && <Resultado metodoEquipo = {this.cambiarAEquipo}/>}
+            {this.state.showResultado && <Resultado idGrup = {this.state.idG} metodoEquipo = {this.cambiarAEquipo}/>}
 
             <div className="footer-bottom">
     <div className="container">

@@ -7,6 +7,7 @@ class Equipo extends Component{
     constructor(props){
         super(props);
         this.state={
+            idGrup :"",
             nameGroup : "",
             idYo: "",
             members : [],
@@ -27,11 +28,13 @@ class Equipo extends Component{
         .then(res=>res.json(res))
         .then(data=>{
             console.log(data);
+            var idGrupo = data[data.length-1]._id;
             var nombreGrupo = data[data.length-1].name;
             var miembros = data[data.length-1].members;
             var id = miembros[miembros.length-1].member;
             console.log(miembros)
             this.setState({
+                idGrup:idGrupo, 
                 nameGroup: nombreGrupo,
                 members: miembros,
                 idYo :id
@@ -62,8 +65,8 @@ class Equipo extends Component{
         })
         console.log(this.state.idMiembro);
     }
-    resultado(e){
-        this.props.metodoResultado();
+    resultado(id){
+        this.props.metodoResultado(id);
     }
     render(){
         return(
@@ -87,7 +90,7 @@ class Equipo extends Component{
                                             Descripcion : 'Descripcion Equipo' 
                                         </div>
                                         <div className = "col s8">
-                                            <button onClick= {this.resultado} className="btn light-blue darken-4">Medir rendimiento</button>
+                                            <button onClick= {() => this.resultado(this.state.idGrup)} className="btn light-blue darken-4">Medir rendimiento</button>
                                         </div>
                                         <div className = "col s8">
                                             <button onClick= {this.regresar} className="btn light-blue darken-4">Regresar</button>

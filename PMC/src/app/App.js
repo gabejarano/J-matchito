@@ -28,7 +28,8 @@ class App extends Component {
             showEquipo:false,
             showResultado: false,
             members: [],
-            group: ""
+            group: "",
+            idG: ""
         };
         this.cambiarEstado = this.cambiarEstado.bind(this);
         this.cambiarALogin = this.cambiarALogin.bind(this);
@@ -141,9 +142,9 @@ class App extends Component {
             showResultado: false
         })
     }
-    cambiarAResultado(){
+    cambiarAResultado(idGrupo){
         this.setState({
-
+            idG: idGrupo,
             showInicio: false,
             showLogin: false,
             showPrincipal: false,

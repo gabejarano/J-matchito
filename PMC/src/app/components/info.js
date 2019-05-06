@@ -23,7 +23,8 @@ class Info extends Component {
         fetch('api/task/members/')
         .then(res=> res.json(res))
         .then(data=>{
-            var id = data[data.length-1]._id;
+            //var id = data[data.length-1]._id;
+            var id=this.props.estadoId;
             console.log(id);
             fetch('api/task/members/'+ id, {
                 method: 'GET',

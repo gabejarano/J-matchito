@@ -56,7 +56,8 @@ class Equipo extends Component{
     }
     personalidad(e){
         e.preventDefault();
-        this.props.metodo2(idMiembro);
+        this.props.metodo2(this.state.idMiembro);
+        console.log('----------------------------------' + this.state.idMiembro);
     }
     handleInput(e){
         const{value, name} = e.target;
@@ -107,7 +108,7 @@ class Equipo extends Component{
                                                 <div>
                                                     
                                                     <div className="input-field col s8"  key={member.member}>
-                                                       <label value={this.state.idMiembro} name="idMiembro" onChange={this.handleInput}>{member.member} </label>    <br />
+                                                       <input type="text" value={member.member} name="idMiembro" onChange={this.handleInput} /> <br />
                                                     </div>
                                                     <div className="input-field col s4">
                                                         <button onClick={this.personalidad} type="submit" className="btn light-blue darken-4">
@@ -118,10 +119,12 @@ class Equipo extends Component{
                                             )
                                         })}
                                         
-                                        <div>
-                                        <button  type="submit" onClick={this.cambiar} className="btn light-blue darken-4">Realizar test</button>
-                                        </div>
+                                        
                                     </form>
+                                    
+                                </div>
+                                <div>
+                                        <button  type="submit" onClick={this.cambiar} className="btn light-blue darken-4">Realizar test</button>
                                 </div>
                             </div>
                         </div>

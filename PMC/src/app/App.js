@@ -194,7 +194,7 @@ class App extends Component {
             metodo2= {this.cambiarAInfo}  estadoGrupo= {this.state.group} estadoMiembros= {this.state.members}
             metodoRegistroEquipos = {this.cambiarARegistroEquipos}/>}
             {/*informacion*/}
-            {this.state.showInfo && <Info metodoEquipo= {this.cambiarAEquipo}/>}
+            {this.state.showInfo && <Info metodoEquipo= {this.cambiarAEquipo} estadoId={this.state.idMiembro}/>}
             {/*Mostrar resultado*/}
             {this.state.showResultado && <Resultado metodoEquipo = {this.cambiarAEquipo}/>}
 

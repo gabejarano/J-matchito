@@ -33,8 +33,8 @@ router.put('/members/personality/:id', async (req, res) => {
             console.log('error:', err);
         } else {
             req.body.personality = response;
-            const {personality, sex,document} = req.body;
-            var user = {personality, sex,document};
+            const { personality, sex, document } = req.body;
+            var user = { personality, sex, document };
             await Member.findByIdAndUpdate(req.params.id, user);
             res.json({ status: 'User saved' });
         }
@@ -52,12 +52,12 @@ router.post('/members/:id/groups', async (req, res) => {
     var actualGroups = await Member.findById(id_member);//.groups
     var toAdd = { "group": group };
     var grupitos = actualGroups.groups.concat(toAdd); //concat([actualGroups.groups, toAdd]);
-        Member.findOneAndUpdate({ _id: id_member }, { $set: { groups: grupitos } }, { new: true }, (err, doc) => {
-            if (err) {
-                console.log("Something wrong when updating data!");
-            }
-            console.log(doc);
-        }),
+    Member.findOneAndUpdate({ _id: id_member }, { $set: { groups: grupitos } }, { new: true }, (err, doc) => {
+        if (err) {
+            console.log("Something wrong when updating data!");
+        }
+        console.log(doc);
+    }),
 
         await group.save();
 
@@ -70,24 +70,74 @@ router.post('/members', async (req, res) => {
 
     var age = "";
     var sex = "";
-    var document ="";
-    var personality= "";
+    var document = "";
+    var personality = "";
     const { name, email, password, repassword } = req.body;
-    var newMember = new Member({ name, email, password, repassword,age ,sex , document , personality });
+    var newMember = new Member({ name, email, password, repassword, age, sex, document, personality });
     await newMember.save();
     res.json({ status: 'member saved' });
 
 })
 
+//---------------- Evaluate group------------------------------------------------
+
+router.get('/groups/:id/eval', async (req, res) => {
+
+    var group = await Group.findById(req.params.id);
+    console.log('Group------------------ ' + group);
+    var id_members = group.members;
+
+    var members = [];
+    var z = 0;
+    while (z < id_members.length) {
+        members[z] = await Member.findById(id_members[z].member);
+        z++;
+    }
+    console.log('Members------------------ ' + members);
+    var personalities = [];
+    var i = 0;
+    while (i < members.length) {
+        if (members[i].personality != null) {
+            var percents = [
+                //Apertura
+                members[i].personality.personality[0].raw_score,
+                //Responsabilidad
+                members[i].personality.personality[1].raw_score,
+                //Extroversion
+                members[i].personality.personality[2].raw_score,
+                //Amabilidad
+                members[i].personality.personality[3].raw_score,
+                //Neuro
+                members[i].personality.personality[4].raw_score
+            ];
+            personalities[i] = percents;
+        }
+        i++;
+    }
+    console.log('****************** ' + personalities);
+    var j = 0;
+    var aperturaCambioGrupo = 0;
+    var responsabilidadGrupo = 0;
+    var extroversionGrupo = 0;
+    var amabilidadGrupo = 0;
+    var necGrupo = 0;
+
+    while (j < personalities.length) {
+        aperturaCambioGrupo += personalities[j][0];
+        j++;
+    }
+})
+
+
 /** --------------------- Add member a group----------------------------------------*/
 router.put('/groups/:id', async (req, res) => {
-    
+
     //Add member to Group
     var actualMembers = await Group.findById(req.params.id);
     var toAdd = req.body.members[0].member;
-    console.log(actualMembers.members +'************')
-    console.log('---------------------' +req.body.members[0].member)
-    var newMembers = actualMembers.members.concat({"member":toAdd});
+    console.log(actualMembers.members + '************')
+    console.log('---------------------' + req.body.members[0].member)
+    var newMembers = actualMembers.members.concat({ "member": toAdd });
     await Group.findOneAndUpdate({ _id: req.params.id }, { $set: { members: newMembers } }, { new: true }, (err, doc) => {
         if (err) {
             console.log("Something wrong when updating data!");
@@ -99,21 +149,23 @@ router.put('/groups/:id', async (req, res) => {
     //Add group to member
     var group = await Group.findById(req.params.id);
     var actualGroups = await Member.findById(toAdd);//.groups
-    console.log('*************'+group)
+    console.log('*************' + group)
     console.log(actualGroups)
     var newGroup = { "group": group };
-    console.log(',,,,,,,,,,,,,,,'+newGroup)
+    console.log(',,,,,,,,,,,,,,,' + newGroup)
     var grupitos = actualGroups.groups.concat(newGroup);
     console.log('------------------------' + grupitos + '.........')
-    await Member.findOneAndUpdate({ _id: toAdd },  {$set: { groups: grupitos } }, { new: true }, (err, doc) => {
+    await Member.findOneAndUpdate({ _id: toAdd }, { $set: { groups: grupitos } }, { new: true }, (err, doc) => {
         if (err) {
             console.log("Something wrong when updating data!");
         }
         console.log(doc);
     }),
-    res.json({ status: 'Group updated' });
+        res.json({ status: 'Group updated' });
 
 });
+
+
 
 
 router.delete('members/:id', async (req, res) => {

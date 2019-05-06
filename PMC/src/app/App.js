@@ -89,7 +89,7 @@ class App extends Component {
             showResultado: false
         })
     }
-    cambiarAInfo(){
+    cambiarAInfo(id){
         this.setState({
             showInicio: false,
             showLogin: false,
@@ -98,7 +98,8 @@ class App extends Component {
             showRegistro: false,
             showRegistriEquipo:false,
             showEquipo:false,
-            showResultado: false
+            showResultado: false,
+            idMiembro: id
         })
     }
     cambiarARegistro(){

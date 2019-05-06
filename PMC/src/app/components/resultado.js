@@ -61,7 +61,7 @@ class Resultado extends Component {
                     <div class="p-t-40 p-b-40  text-center">
 
                         <h2 class="text-center">
-                            Observa tus cualidades y caracteristicas de tu personalidad</h2>
+                            Cualidades del grupo</h2>
                     </div>
                 </div>
                 <div >

@@ -9,12 +9,14 @@ class Equipo extends Component{
         this.state={
             nameGroup : "",
             idYo: "",
-            members : []
+            members : [],
+            idMiembro: ""
         }
         this.personalidad= this.personalidad.bind(this);
         this.cambiar= this.cambiar.bind(this);
         this.resultado= this.resultado.bind(this);
         this.regresar= this.regresar.bind(this);
+        this.handleInput= this.handleInput.bind(this);
       }
     
     componentDidMount(){
@@ -50,7 +52,15 @@ class Equipo extends Component{
         this.props.metodoRegistro();
     }
     personalidad(e){
-        this.props.metodo2();
+        e.preventDefault();
+        this.props.metodo2(idMiembro);
+    }
+    handleInput(e){
+        const{value, name} = e.target;
+        this.setState({
+            [name] : value
+        })
+        console.log(this.state.idMiembro);
     }
     resultado(e){
         this.props.metodoResultado();
@@ -89,12 +99,12 @@ class Equipo extends Component{
                                     <form >
                                         <div><h1>Integrantes</h1></div>
                                         {/*<Integrantes estado = {this.state.member}/>*/}
-                                        {this.state.members.map(member => {
+                                        {this.state.members.map(member => { 
                                             return (
                                                 <div>
                                                     
-                                                    <div className="input-field col s8">
-                                                        {member.member}    <br />
+                                                    <div className="input-field col s8"  key={member.member}>
+                                                       <label value={this.state.idMiembro} name="idMiembro" onChange={this.handleInput}>{member.member} </label>    <br />
                                                     </div>
                                                     <div className="input-field col s4">
                                                         <button onClick={this.personalidad} type="submit" className="btn light-blue darken-4">

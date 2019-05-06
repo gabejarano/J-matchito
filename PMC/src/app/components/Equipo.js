@@ -24,6 +24,7 @@ class Equipo extends Component{
         fetch('/api/task/groups')
         .then(res=>res.json(res))
         .then(data=>{
+            console.log(data);
             var nombreGrupo = data[data.length-1].name;
             var miembros = data[data.length-1].members;
             var id = miembros[miembros.length-1].member;
@@ -38,7 +39,7 @@ class Equipo extends Component{
             nameGroup: this.props.estadoGrupo,
             members: this.props.estadoMiembros
         }) */
-
+        
     };
     
 
@@ -86,24 +87,27 @@ class Equipo extends Component{
                             <div className="card">
                                 <div className="card-content">
                                     <form >
-										<Integrantes estado = {this.state.member}/>
-                                        <div className="row">
-                                            <div className="input-field col s8">
-											 {this.state.idYo}<br/>
-                                            </div>
-                                            <div className="input-field col s4">
-                                            <button onClick = {this.personalidad} type="submit" className="btn light-blue darken-4">
-                                            Ver personalidad
-                                            </button>
-                                            </div>
-                                            <div className="input-field col s4">
-                                            <button onClick = {this.cambiar} type="submit" className="btn light-blue darken-4">
-                                            Realizar test
-                                            </button>
-                                            </div>
-                                            
-                                        </div>
+                                        <div><h1>Integrantes</h1></div>
+                                        {/*<Integrantes estado = {this.state.member}/>*/}
+                                        {this.state.members.map(member => {
+                                            return (
+                                                <div>
+                                                    
+                                                    <div className="input-field col s8">
+                                                        {member.member}    <br />
+                                                    </div>
+                                                    <div className="input-field col s4">
+                                                        <button onClick={this.personalidad} type="submit" className="btn light-blue darken-4">
+                                                            Ver personalidad
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            )
+                                        })}
                                         
+                                        <div>
+                                        <button  type="submit" onClick={this.cambiar} className="btn light-blue darken-4">Realizar test</button>
+                                        </div>
                                     </form>
                                 </div>
                             </div>

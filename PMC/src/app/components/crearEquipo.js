@@ -122,7 +122,6 @@ class CrearEquipo extends Component{
                         <div className="row">
                             <div  className="col-md-4 col-sm-4 col-xs-12 col-6">
                              <div className="service-single">
-                                <img src="src/app/assets/img/service/service-img1.png" alt="service image"/>
                                 <a onClick={this.mostrarCrear}><h2>Registra tu equipo</h2></a>
                                 <p>Toma la iniciativa de medir tu equipo</p>
                              </div>
@@ -153,7 +152,6 @@ class CrearEquipo extends Component{
                     
                 <div  className="col-md-4 col-sm-4 col-xs-12 col-6" > 
                     <div className="service-single">
-                        <img src="src\app\assets\img\service\service-img3.png" alt="service image"/>
                         <a onClick={this.mostrarCodigo}><h2>Ya tienes equipo</h2></a>
                        <p>Ingresa codigo de tu equipo</p>
                     </div>

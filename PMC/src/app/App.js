@@ -181,9 +181,7 @@ class App extends Component {
             {/* Inicio */}
             {this.state.showLogin && <Login metodoRegistro={this.cambiarARegistro} />}
             {/*formulario*/}
-            {this.state.showPrincipal && <Principal metodo2= {this.cambiarAInfo}/>}
-            {/*informacion*/}
-            {this.state.showInfo && <Info metodoEquipo= {this.cambiarAEquipo}/>}
+            {this.state.showPrincipal && <Principal metodo2= {this.cambiarAEquipo}/>}
             {/*registro*/}
             {this.state.showRegistro && <SingUp metodoLogin = {this.cambiarALogin} metodoRegistroEquipos = {this.cambiarARegistroEquipos}/>}
             {/*registroEquipo*/}
@@ -192,6 +190,8 @@ class App extends Component {
             {this.state.showEquipo && <Equipo metodoResultado = {this.cambiarAResultado} metodoRegistro={this.cambiarAFormulario} 
             metodo2= {this.cambiarAInfo}  estadoGrupo= {this.state.group} estadoMiembros= {this.state.members}
             metodoRegistroEquipos = {this.cambiarARegistroEquipos}/>}
+            {/*informacion*/}
+            {this.state.showInfo && <Info metodoEquipo= {this.cambiarAEquipo}/>}
             {/*Mostrar resultado*/}
             {this.state.showResultado && <Resultado metodoEquipo = {this.cambiarAEquipo}/>}
 

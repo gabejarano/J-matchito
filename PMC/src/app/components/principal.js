@@ -34,14 +34,15 @@ class Principal extends Component {
                 }
             })
             .then(res => res.json(res))
-
+            
         })
         .then(()=> {this.props.metodo2()})
         .catch(err => console.error(err));
+        e.preventDefault();
 
             //Poner redireccioanmiento a "Has sido registrado exitosamente"
 
-        e.preventDefault();
+       
     }
 
     handleChange(e) {
@@ -107,7 +108,10 @@ class Principal extends Component {
                                             <input value={this.state.achievement} name="achievement" onChange={this.handleChange} type="text" placeholder="" />
                                         </div>
                                     </div>
-                                    <button  type="submit" className="btn light-blue darken-4">Send</button>
+                                    <div className= "form-group">
+                                        <input type="submit" name="submit" className="form-submit"/>
+                                    </div>
+                                    
                                 </form>
                             </div>
                         </div>

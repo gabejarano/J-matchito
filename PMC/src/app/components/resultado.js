@@ -20,6 +20,7 @@ class Resultado extends Component{
      <div id="porcion2" className="recorte"><div className="quesito" data-rel="120"></div></div>
      <div id="porcion3" className="recorte"><div className="quesito" data-rel="25"></div></div>
      <div id="porcionFin" className="recorte"><div className="quesito" data-rel="145"></div></div>
+     <div id="" className="recorte"><div className="quesito" data-rel="145"></div></div>
 </div>
 <div className="container">
                     <div className="row">

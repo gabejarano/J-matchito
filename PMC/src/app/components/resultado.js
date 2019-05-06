@@ -43,11 +43,11 @@ class Resultado extends Component {
 
                         <div className="grafico">
                             <div className="sombra"></div>
-                            <div id="porcion1" className="recorte"><div className="quesito" data-rel={}></div></div>
-                            <div id="porcion2" className="recorte"><div className="quesito" data-rel="120"></div></div>
-                            <div id="porcion3" className="recorte"><div className="quesito" data-rel="25"></div></div>
-                            <div id="porcionfin" className="recorte"><div className="quesito" data-rel="145"></div></div>
-                            <div id="" className="recorte"><div className="quesito" data-rel="145"></div></div>
+                            <div id="porcion1" className="recorte"><div className="quesito" data-rel={this.state.p1}></div></div>
+                            <div id="porcion2" className="recorte"><div className="quesito" data-rel={this.state.p2}></div></div>
+                            <div id="porcion3" className="recorte"><div className="quesito" data-rel={this.state.p3}></div></div>
+                            <div id="porcion4" className="recorte"><div className="quesito" data-rel={this.state.p4}></div></div>
+                            <div id="porcion5" className="recorte"><div className="quesito" data-rel={this.state.p5}></div></div>
                         </div>
                         <div className="container">
                             <div className="row">

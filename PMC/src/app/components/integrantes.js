@@ -28,11 +28,11 @@ class Integrantes extends Component{
       }
 
     render(){
-       
-        const members = this.state.members.map((member,i)=> {
+        <div><h1>prueba</h1></div>
+        this.state.members.map(member=> {
         return(
             <div>
-                    <div><h1>prueba</h1></div>
+                    
                     <div className="input-field col s8">
 					{member.member}    <br/>
                     </div>

@@ -145,7 +145,7 @@ router.get('/groups/:id/eval', async (req, res) => {
         }
         console.log(doc);
     }),
-    res.json({ status: 'Group percentajes updated' });
+    res.json();
 
 })
 

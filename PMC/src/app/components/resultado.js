@@ -25,20 +25,28 @@ class Resultado extends Component {
         console.log('IDGROUPP----' + this.props.idGrup)
 
         fetch('/api/task/groups/' + this.props.idGrup + '/eval')
-            .then(res => res.json())
-            .then(data=>{
-                console.log('----------data----' + data)
-                this.setState({
-                    p1: Math.trunc(data[0] * 100),
-                    p2: Math.trunc(data[1] * 100),
-                    p3: Math.trunc(data[2] * 100),
-                    p4: Math.trunc(data[3] * 100),
-                    p5: Math.trunc(data[4] * 100)
-                })
-
-            })
-                
-            
+        .then(res => res.json(res))
+        
+                console.log("entré")
+                fetch('/api/task/groups/' + this.props.idGrup)
+                .then(res=>res.json(res))
+                    .then(data=>{
+                        console.log('----------data----' + data)
+                        var v1= data.percentajes[0] * 100;
+                        var v2 = data.percentajes[1] * 100;
+                        var v3= data.percentajes[2] * 100;
+                        var v4 = data.percentajes[3] * 100;
+                        var v5= data.percentajes[4] * 100;
+                        this.setState({
+                            p1: Math.trunc(v1),
+                            p2: Math.trunc(v2),
+                            p3: Math.trunc(v3),
+                            p4: Math.trunc(v4),
+                            p5: Math.trunc(v5)
+                        })
+        
+                    })
+              
     };
 
 

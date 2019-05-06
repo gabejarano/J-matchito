@@ -114,7 +114,7 @@ router.get('/groups/:id/eval', async (req, res) => {
         }
         i++;
     }
-    console.log('****************** ' + personalities);
+    console.log('Personalities -------------------- ' + personalities);
     var j = 0;
     var aperturaCambioGrupo = 0;
     var responsabilidadGrupo = 0;
@@ -124,8 +124,29 @@ router.get('/groups/:id/eval', async (req, res) => {
 
     while (j < personalities.length) {
         aperturaCambioGrupo += personalities[j][0];
+        responsabilidadGrupo += personalities[j][1];
+        extroversionGrupo += personalities[j][2];
+        amabilidadGrupo += personalities[j][3];
+        necGrupo += personalities[j][4];
         j++;
     }
+    aperturaCambioGrupo = aperturaCambioGrupo/personalities.length;
+    responsabilidadGrupo = responsabilidadGrupo/personalities.length;
+    extroversionGrupo = extroversionGrupo/personalities.length;
+    amabilidadGrupo = amabilidadGrupo/personalities.length;
+    necGrupo = necGrupo/personalities.length;
+
+    var groupPercentajes = [aperturaCambioGrupo,responsabilidadGrupo,extroversionGrupo,amabilidadGrupo,necGrupo];
+
+    console.log('GroupPercentajes.................' +groupPercentajes)
+    await Group.findOneAndUpdate({ _id: req.params.id }, { $set: { percentajes: groupPercentajes } }, { new: true }, (err, doc) => {
+        if (err) {
+            console.log("Something wrong with the group percentajes!");
+        }
+        console.log(doc);
+    }),
+    res.json({ status: 'Group percentajes updated' });
+
 })
 
 
